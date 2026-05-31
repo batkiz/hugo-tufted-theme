@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Tufted Hugo Theme</title>
+    <link>http://localhost:1313/tags/python/</link>
+    <description>Recent content in Python on Tufted Hugo Theme</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 04 Oct 2024 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Iterators vs Generators in Python</title>
+      <link>http://localhost:1313/blog/iterators-vs-generators/</link>
+      <pubDate>Fri, 04 Oct 2024 00:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/blog/iterators-vs-generators/</guid>
+      <description>&lt;p&gt;Python gives us two closely related tools for lazy evaluation: iterators and generators.&lt;/p&gt;&#xA;&lt;h2 id=&#34;iterator&#34;&gt;Iterator&lt;/h2&gt;&#xA;&lt;p&gt;An iterator is any object that implements &lt;code&gt;__iter__()&lt;/code&gt; and &lt;code&gt;__next__()&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;generator&#34;&gt;Generator&lt;/h2&gt;&#xA;&lt;p&gt;A generator is a compact way to build an iterator with &lt;code&gt;yield&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Both are useful, but generators are often the more ergonomic default when you control the data source.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

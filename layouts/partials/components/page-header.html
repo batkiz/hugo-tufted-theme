@@ -1,0 +1,33 @@
+{{ $page := .page }}
+{{ $showMeta := .showMeta | default false }}
+{{ $title := $page.Title | default $page.Site.Title }}
+{{ if and (eq $page.Kind "section") (eq $title "Posts") }}
+  {{ $title = i18n "archive" | default "Archive" }}
+{{ end }}
+<header class="entry-header">
+  {{ if and (not $page.IsHome) $page.Section }}
+    {{ $sectionPage := $page.Site.GetPage $page.Section }}
+    {{ $sectionTitle := $page.Section | humanize }}
+    {{ with $sectionPage }}
+      {{ $sectionTitle = .Title }}
+    {{ end }}
+    {{ if eq $sectionTitle "Posts" }}
+      {{ $sectionTitle = i18n "posts" | default "Posts" }}
+    {{ end }}
+    <p class="entry-kicker">{{ $sectionTitle }}</p>
+  {{ end }}
+
+  <h1>{{ $title }}</h1>
+
+  {{ with $page.Params.subtitle }}
+    <p class="entry-subtitle">{{ . | markdownify }}</p>
+  {{ end }}
+
+  {{ with $page.Description | default $page.Params.description }}
+    <p class="entry-description">{{ . }}</p>
+  {{ end }}
+
+  {{ if $showMeta }}
+    {{ partial "components/page-meta.html" $page }}
+  {{ end }}
+</header>

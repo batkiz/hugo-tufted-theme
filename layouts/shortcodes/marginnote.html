@@ -1,0 +1,4 @@
+{{ $content := .Inner | markdownify | replaceRE `(?s)<p>(\s*<figure.*?</figure>\s*)</p>` `${1}` }}
+<aside class="marginnote">
+  {{ $content | safeHTML }}
+</aside>

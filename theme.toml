@@ -1,0 +1,12 @@
+name = "hugo-tufted-theme"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A Hugo theme inspired by the Tufted Typst blog template and Tufte-style reading layouts, with full blog features."
+homepage = "https://github.com/Yousa-Mirage/Tufted-Blog-Template"
+tags = ["blog", "portfolio", "tufte", "minimal", "serif", "responsive", "dark-mode"]
+features = ["blog", "dark-mode", "responsive", "rss", "shortcodes", "comments", "analytics", "math", "i18n", "archives", "featured-posts", "series", "pagination", "toc", "image-zoom", "seo", "schema-org"]
+min_version = "0.123.0"
+
+[author]
+  name = "OpenAI Codex"
+  homepage = "https://openai.com/"

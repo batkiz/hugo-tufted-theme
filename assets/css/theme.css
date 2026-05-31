@@ -1,0 +1,318 @@
+/*******************************************************************************
+THEME CONFIGURATION
+主题配置 - 深色/浅色模式切换
+
+This file contains all styles related to light/dark theme switching.
+*******************************************************************************/
+
+/*******************************************************************************
+CSS CUSTOM PROPERTIES (Theme Variables)
+*******************************************************************************/
+
+:root {
+    /* Light mode colors (default) */
+    --theme-bg: #fffff8;
+    --theme-text: #15130f;
+    --theme-heading: #15130f;
+    --theme-muted: #6f6a60;
+    --theme-faint: #9c9587;
+    --theme-rule: rgba(83, 74, 58, 0.22);
+    --theme-rule-strong: rgba(83, 74, 58, 0.36);
+    --theme-note-bg: rgba(111, 92, 52, 0.075);
+    --theme-code-bg: #f4f0e8;
+    --theme-code-text: inherit;
+    --theme-code-border: rgba(83, 74, 58, 0.18);
+    --theme-pre-bg: #f6f1e8;
+    --theme-pre-border: rgba(83, 74, 58, 0.20);
+    --theme-line-numbers-border: rgba(83, 74, 58, 0.20);
+    --theme-line-numbers-text: #b4ab9a;
+    --theme-copy-btn-bg: #fffff8;
+    --theme-copy-btn-text: #6f6a60;
+    --theme-copy-btn-border: rgba(83, 74, 58, 0.26);
+    --theme-copy-btn-hover-bg: #eee7d9;
+    --theme-copy-btn-hover-text: #15130f;
+    --theme-copy-btn-copied-bg: #e6fffa;
+    --theme-copy-btn-copied-text: #008000;
+    --theme-copy-btn-copied-border: #008000;
+    --theme-table-border: rgba(83, 74, 58, 0.24);
+    --theme-table-header-bg: #f3eddf;
+    --theme-table-row-even: rgba(111, 92, 52, 0.04);
+    --theme-table-row-hover: rgba(111, 92, 52, 0.09);
+    --syntax-base: #2b2924;
+    --syntax-string: #7a5a00;
+    --syntax-keyword: #9d174d;
+    --syntax-name: #446700;
+    --syntax-type: #0f6680;
+    --syntax-comment: #7c7566;
+    --theme-math-filter: none;
+}
+
+/* Dark mode variables */
+html[data-theme="dark"],
+html:not([data-theme]) {
+    --theme-bg: #191815;
+    --theme-text: #e7e0cf;
+    --theme-heading: #f3ead9;
+    --theme-muted: #ada38f;
+    --theme-faint: #817866;
+    --theme-rule: rgba(231, 224, 207, 0.18);
+    --theme-rule-strong: rgba(231, 224, 207, 0.30);
+    --theme-note-bg: rgba(231, 224, 207, 0.07);
+    --theme-code-bg: #25231e;
+    --theme-code-text: #ece4d3;
+    --theme-code-border: rgba(231, 224, 207, 0.14);
+    --theme-pre-bg: #22201b;
+    --theme-pre-border: rgba(231, 224, 207, 0.16);
+    --theme-line-numbers-border: rgba(231, 224, 207, 0.16);
+    --theme-line-numbers-text: #766f60;
+    --theme-copy-btn-bg: #2a2822;
+    --theme-copy-btn-text: #c8bea8;
+    --theme-copy-btn-border: rgba(231, 224, 207, 0.20);
+    --theme-copy-btn-hover-bg: #343127;
+    --theme-copy-btn-hover-text: #f3ead9;
+    --theme-copy-btn-copied-bg: #1a4d3a;
+    --theme-copy-btn-copied-text: #5fda9d;
+    --theme-copy-btn-copied-border: #5fda9d;
+    --theme-table-border: rgba(231, 224, 207, 0.18);
+    --theme-table-header-bg: #28251f;
+    --theme-table-row-even: rgba(231, 224, 207, 0.04);
+    --theme-table-row-hover: rgba(231, 224, 207, 0.08);
+    --syntax-base: #f8f8f2;
+    --syntax-string: #e6db74;
+    --syntax-keyword: #f92672;
+    --syntax-name: #a6e22e;
+    --syntax-type: #66d9ef;
+    --syntax-comment: #918d78;
+    --theme-math-filter: invert(1) hue-rotate(180deg);
+}
+
+/* System preference: only apply dark variables when no explicit theme is set */
+@media (prefers-color-scheme: light) {
+    html:not([data-theme]) {
+        --theme-bg: #fffff8;
+        --theme-text: #15130f;
+        --theme-heading: #15130f;
+        --theme-muted: #6f6a60;
+        --theme-faint: #9c9587;
+        --theme-rule: rgba(83, 74, 58, 0.22);
+        --theme-rule-strong: rgba(83, 74, 58, 0.36);
+        --theme-note-bg: rgba(111, 92, 52, 0.075);
+        --theme-code-bg: #f4f0e8;
+        --theme-code-text: inherit;
+        --theme-code-border: rgba(83, 74, 58, 0.18);
+        --theme-pre-bg: #f6f1e8;
+        --theme-pre-border: rgba(83, 74, 58, 0.20);
+        --theme-line-numbers-border: rgba(83, 74, 58, 0.20);
+        --theme-line-numbers-text: #b4ab9a;
+        --theme-copy-btn-bg: #fffff8;
+        --theme-copy-btn-text: #6f6a60;
+        --theme-copy-btn-border: rgba(83, 74, 58, 0.26);
+        --theme-copy-btn-hover-bg: #eee7d9;
+        --theme-copy-btn-hover-text: #15130f;
+        --theme-copy-btn-copied-bg: #e6fffa;
+        --theme-copy-btn-copied-text: #008000;
+        --theme-copy-btn-copied-border: #008000;
+        --theme-table-border: rgba(83, 74, 58, 0.24);
+        --theme-table-header-bg: #f3eddf;
+        --theme-table-row-even: rgba(111, 92, 52, 0.04);
+        --theme-table-row-hover: rgba(111, 92, 52, 0.09);
+        --syntax-base: #2b2924;
+        --syntax-string: #7a5a00;
+        --syntax-keyword: #9d174d;
+        --syntax-name: #446700;
+        --syntax-type: #0f6680;
+        --syntax-comment: #7c7566;
+        --theme-math-filter: none;
+    }
+}
+
+
+/*******************************************************************************
+THEME STYLES (using CSS variables)
+*******************************************************************************/
+
+html {
+    background-color: var(--theme-bg) !important;
+    color: var(--theme-text) !important;
+}
+
+body {
+    background-color: var(--theme-bg) !important;
+    color: var(--theme-text) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--theme-heading) !important;
+}
+
+.site-tagline,
+.entry-kicker,
+.entry-subtitle,
+.entry-description,
+.page-meta,
+.marginnote,
+figcaption,
+.site-note-strip,
+.site-footer-inner,
+.pagination-label,
+.page-info,
+.archive-date,
+.month-count {
+    color: var(--theme-muted) !important;
+}
+
+a,
+a:link,
+a:visited {
+    color: inherit !important;
+    background-color: transparent !important;
+    text-shadow: none !important;
+    background-image: none !important;
+    text-decoration: underline !important;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 0.06em;
+}
+
+code {
+    background-color: var(--theme-code-bg) !important;
+    color: var(--theme-code-text) !important;
+    border-color: var(--theme-code-border) !important;
+}
+
+pre {
+    background-color: var(--theme-pre-bg) !important;
+    border-color: var(--theme-pre-border) !important;
+    color: var(--syntax-base) !important;
+}
+
+pre>code {
+    color: var(--syntax-base) !important;
+}
+
+.highlight pre[style],
+.highlight code,
+.highlight span {
+    color: var(--syntax-base) !important;
+}
+
+.highlight span[style*="color:#e6db74"],
+.highlight span[style*="color: #e6db74"] {
+    color: var(--syntax-string) !important;
+}
+
+.highlight span[style*="color:#f92672"],
+.highlight span[style*="color: #f92672"] {
+    color: var(--syntax-keyword) !important;
+}
+
+.highlight span[style*="color:#a6e22e"],
+.highlight span[style*="color: #a6e22e"] {
+    color: var(--syntax-name) !important;
+}
+
+.highlight span[style*="color:#66d9ef"],
+.highlight span[style*="color: #66d9ef"],
+.highlight span[style*="color:#ae81ff"],
+.highlight span[style*="color: #ae81ff"] {
+    color: var(--syntax-type) !important;
+}
+
+.highlight span[style*="color:#75715e"],
+.highlight span[style*="color: #75715e"] {
+    color: var(--syntax-comment) !important;
+}
+
+.line-numbers-rows {
+    border-right-color: var(--theme-line-numbers-border) !important;
+    color: var(--theme-line-numbers-text) !important;
+}
+
+.copy-button {
+    background-color: var(--theme-copy-btn-bg) !important;
+    color: var(--theme-copy-btn-text) !important;
+    border-color: var(--theme-copy-btn-border) !important;
+}
+
+.copy-button:hover {
+    background-color: var(--theme-copy-btn-hover-bg) !important;
+    color: var(--theme-copy-btn-hover-text) !important;
+}
+
+.copy-button.copied {
+    background-color: var(--theme-copy-btn-copied-bg) !important;
+    color: var(--theme-copy-btn-copied-text) !important;
+    border-color: var(--theme-copy-btn-copied-border) !important;
+}
+
+div[style*="border-inline-start"] .footnote-ref,
+div[style*="border-inline-start"] .marginnote,
+div[style*="border-inline-start"] .footnote-ref a {
+    color: var(--theme-heading) !important;
+}
+
+table th,
+table td {
+    border-color: var(--theme-table-border) !important;
+}
+
+table th,
+table thead td {
+    background-color: var(--theme-table-header-bg) !important;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: var(--theme-table-row-even) !important;
+}
+
+table tbody tr:hover {
+    background-color: var(--theme-table-row-hover) !important;
+}
+
+[role="math"] {
+    filter: var(--theme-math-filter) !important;
+}
+
+
+/*******************************************************************************
+THEME TOGGLE BUTTON (DeepWiki Style)
+*******************************************************************************/
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    padding: 0;
+    background: var(--theme-note-bg);
+    border: 1px solid var(--theme-rule);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    margin: 0;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    color: var(--theme-heading);
+}
+
+.theme-toggle-btn:hover {
+    background: var(--highlight-weak, rgba(128, 128, 128, 0.2));
+    border-color: var(--theme-rule-strong);
+}
+
+.theme-toggle-btn:focus-visible {
+    outline: 2px solid var(--highlight-strong, rgba(128, 128, 128, 0.4));
+    outline-offset: 2px;
+}
+
+.theme-toggle-btn svg {
+    width: 1.05rem;
+    height: 1.05rem;
+}
+
+.theme-toggle-btn.is-dark {
+    color: var(--theme-heading);
+}

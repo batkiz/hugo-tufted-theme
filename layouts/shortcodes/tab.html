@@ -1,0 +1,11 @@
+{{ $name := .Get "name" | default "Name Me!" }}
+{{ $parent := .Parent }}
+{{ if $parent }}
+{{ $groupID := $parent.Get "data-tabgroup" }}
+{{ $index := .Ordinal }}
+<input type="radio" id="tab-{{ $groupID }}-{{ $index }}" name="tabgroup-{{ $groupID }}" {{ if eq $index 0 }}checked{{ end }} hidden>
+<label for="tab-{{ $groupID }}-{{ $index }}">{{ $name }}</label>
+<div class="tab-content">
+  {{ .Inner | markdownify }}
+</div>
+{{ end }}

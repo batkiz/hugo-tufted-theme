@@ -1,0 +1,38 @@
+[reading_time]
+other = "{{ . }} 分钟阅读"
+
+[word_count]
+other = "{{ . }} 字"
+
+[tags]
+other = "标签"
+
+[related_resources]
+other = "系列文章"
+
+[featured_posts]
+other = "推荐阅读"
+
+[recent_posts]
+other = "最新文章"
+
+[archive]
+other = "历史文章"
+
+[posts]
+other = "文章"
+
+[series]
+other = "系列"
+
+[previous]
+other = "上一篇"
+
+[next]
+other = "下一篇"
+
+[toc]
+other = "目录"
+
+[back_to_top]
+other = "回到顶部"

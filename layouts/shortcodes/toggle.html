@@ -1,0 +1,7 @@
+{{ $summary := .Get "summary" | default "Toggle" }}
+<details class="toggle-shortcode">
+  <summary>{{ $summary | markdownify }}</summary>
+  <div class="toggle-content">
+    {{ .Inner | markdownify }}
+  </div>
+</details>

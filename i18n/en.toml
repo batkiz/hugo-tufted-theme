@@ -1,0 +1,35 @@
+[reading_time]
+other = "{{ . }} min read"
+
+[word_count]
+other = "{{ . }} words"
+
+[tags]
+other = "Tags"
+
+[related_resources]
+other = "Related Posts"
+
+[featured_posts]
+other = "Featured Posts"
+
+[recent_posts]
+other = "Recent Posts"
+
+[archive]
+other = "Archives"
+
+[series]
+other = "Series"
+
+[previous]
+other = "Previous"
+
+[next]
+other = "Next"
+
+[toc]
+other = "Table of Contents"
+
+[back_to_top]
+other = "Back to top"

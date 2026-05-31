@@ -1,0 +1,13 @@
+<footer class="site-footer">
+  {{ with .Site.Params.footerElements }}
+    <div class="site-footer-inner">
+      {{ range . }}
+        <p>{{ . | markdownify }}</p>
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="site-footer-inner">
+      <p>Powered by <a href="https://gohugo.io/">Hugo</a></p>
+    </div>
+  {{ end }}
+</footer>

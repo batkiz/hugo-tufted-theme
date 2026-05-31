@@ -1,0 +1,30 @@
+{{- $series := .Params.series -}}
+{{- $maxRelated := .Site.Params.maxRelatedResources | default 10 -}}
+{{- if $series }}
+{{- $related := slice -}}
+{{- range $term := $series }}
+  {{- $taxonomy := or (index $.Site.Taxonomies.series ($term | lower | urlize)) (index $.Site.Taxonomies.series ($term | urlize)) (index $.Site.Taxonomies.series $term) -}}
+  {{- with $taxonomy }}
+    {{- range first $maxRelated .Pages }}
+      {{- if ne .RelPermalink $.RelPermalink }}
+        {{- $related = $related | append . -}}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- with $related | uniq }}
+<section class="series-block">
+  <h2>{{ i18n "related_resources" | default "Related Posts" }}</h2>
+  <ul class="series-list">
+    {{- range . }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{- with .Params.externalLink }}
+      <a href="{{ . }}" target="_blank" rel="noopener" class="external-link">&#8599;</a>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- end }}

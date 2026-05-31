@@ -1,0 +1,39 @@
+{{ define "main" }}
+  {{ partial "components/page-header.html" (dict "page" . "isSingle" true "showMeta" true) }}
+
+  <div class="entry-layout">
+    <div class="entry-content">
+      {{ .Content }}
+    </div>
+  </div>
+
+  {{ with .GetTerms "tags" }}
+    <section class="taxonomy-block">
+      <h2>{{ i18n "tags" | default "Tags" }}</h2>
+      <ul class="taxonomy-list">
+        {{ range . }}
+          <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+  {{ partial "blog/series.html" . }}
+
+  <nav class="post-pagination" aria-label="Post navigation">
+    {{ with .PrevInSection }}
+      <a class="prev-post" href="{{ .RelPermalink }}">
+        <span class="pagination-label">{{ i18n "previous" | default "Previous" }}</span>
+        <span class="pagination-title">{{ .LinkTitle }}</span>
+      </a>
+    {{ end }}
+    {{ with .NextInSection }}
+      <a class="next-post" href="{{ .RelPermalink }}">
+        <span class="pagination-label">{{ i18n "next" | default "Next" }}</span>
+        <span class="pagination-title">{{ .LinkTitle }}</span>
+      </a>
+    {{ end }}
+  </nav>
+
+  {{ partial "common/comments.html" . }}
+{{ end }}

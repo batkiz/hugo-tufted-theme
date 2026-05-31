@@ -1,0 +1,10 @@
+{{ $align := .Get "align" | default "left" }}
+{{ $style := .Get "style" | default "markdown" }}
+{{ $groupID := printf "tabgroup-%s-%d" .Page.File.UniqueID .Ordinal }}
+{{ if eq $style "code" }}
+<div class="tabs tabs-code tabs-align-{{ $align }}" data-tabgroup="{{ $groupID }}">
+{{ else }}
+<div class="tabs tabs-markdown tabs-align-{{ $align }}" data-tabgroup="{{ $groupID }}">
+{{ end }}
+  {{ .Inner }}
+</div>

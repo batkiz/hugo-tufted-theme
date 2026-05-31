@@ -1,0 +1,48 @@
+{{ define "main" }}
+  {{ $homeText := .Plain | strings.TrimSpace }}
+  {{ $infoText := .Site.Params.info | default "" | plainify | strings.TrimSpace }}
+
+  <section class="home-intro">
+    <div class="home-intro-copy">
+      {{ with .Site.Params.authorDescription }}
+        <p class="author-desc">{{ . | markdownify }}</p>
+      {{ end }}
+      {{ with .Site.Params.info }}
+        <p class="author-info">{{ . | markdownify }}</p>
+      {{ end }}
+      {{ if and .Content (ne $homeText $infoText) }}
+        <div class="home-note">{{ .Content }}</div>
+      {{ end }}
+    </div>
+    {{ with .Site.Params.avatarURL }}
+      <img class="avatar" src="{{ . }}" alt="{{ $.Site.Title }} avatar">
+    {{ end }}
+  </section>
+
+  <!-- Featured Posts -->
+  {{ $featured := where .Site.RegularPages "Params.featured" true }}
+  {{ if gt (len $featured) 0 }}
+    <section class="featured-section">
+      <h2>{{ i18n "featured_posts" | default "Featured Posts" }}</h2>
+      {{ range $featured }}
+        {{ partial "components/post-tile.html" . }}
+      {{ end }}
+    </section>
+  {{ end }}
+
+  <!-- Recent Posts -->
+  {{ $mainSections := site.Params.mainSections | default (slice "blog") }}
+  {{ $recentCount := int (site.Params.recentPostsCount | default 5) }}
+  {{ $recentPages := first $recentCount ((where site.RegularPages "Section" "in" $mainSections).ByDate.Reverse) }}
+
+  {{ if gt (len $recentPages) 0 }}
+    <section class="page-list">
+      <div class="section-heading">
+        <h2>{{ i18n "recent_posts" | default "Recent Posts" }}</h2>
+      </div>
+      {{ range $recentPages }}
+        {{ partial "components/post-tile.html" . }}
+      {{ end }}
+    </section>
+  {{ end }}
+{{ end }}

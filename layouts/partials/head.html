@@ -1,0 +1,69 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffff8">
+
+  {{ $title := "" }}
+  {{ if .IsHome }}
+    {{ $title = .Site.Title }}
+  {{ else }}
+    {{ $title = printf "%s | %s" .Title .Site.Title }}
+  {{ end }}
+  <title>{{ $title }}</title>
+
+  {{ $description := .Description | default .Params.description | default .Site.Params.description | default .Site.Title }}
+  <meta name="description" content="{{ $description }}">
+
+  {{ with .Site.Params.author.name }}
+    <meta name="author" content="{{ . }}">
+  {{ else }}
+    {{ with .Site.Params.author }}
+      <meta name="author" content="{{ . }}">
+    {{ end }}
+  {{ end }}
+
+  {{ with .Params.canonicalURL }}
+    <link rel="canonical" href="{{ . }}">
+  {{ else }}
+    <link rel="canonical" href="{{ .Permalink }}">
+  {{ end }}
+
+  {{ partial "common/extensions.html" . }}
+
+  {{ with .OutputFormats.Get "RSS" }}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .RelPermalink }}" title="{{ $.Site.Title }}">
+  {{ end }}
+
+  {{ partial "common/icon.html" . }}
+
+  {{ partial "common/analytics.html" . }}
+
+  {{ $foucInit := resources.Get "js/fouc-init.js" | minify }}
+  <script>{{ $foucInit.Content | safeJS }}</script>
+
+  {{ $css := slice
+    (resources.Get "css/tufted.css")
+    (resources.Get "css/theme.css")
+    (resources.Get "css/custom.css")
+    | resources.Concat "css/site.css"
+    | minify
+    | fingerprint
+  }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+  {{ partial "math.html" . }}
+
+  {{ $js := slice
+    (resources.Get "js/theme-toggle.js")
+    (resources.Get "js/code-blocks.js")
+    (resources.Get "js/format-headings.js")
+    (resources.Get "js/image-layout.js")
+    (resources.Get "js/marginnote-toggle.js")
+    (resources.Get "js/medium-zoom-init.js")
+    (resources.Get "js/top-link.js")
+    | resources.Concat "js/site.js"
+    | minify
+    | fingerprint
+  }}
+  <script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+</head>

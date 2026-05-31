@@ -1,0 +1,20 @@
+{{- $useMath := or .Params.math .Params.katex .Site.Params.katex -}}
+{{- if $useMath }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k557QswIi7XD5A1l3oJkIZi9rX3RF2TbnJN6vT5v8H4V7L4T8o0M2l2v" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74d3e1oZQ6hqSJ8q3L5q1f6b5V3b4j4s3S8v7wzI5O8NwXJvI4"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQ43Rf0u" crossorigin="anonymous"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ],
+    macros: {
+      '\\eqref': '\\href{###1}{(\\text{#1})}',
+      '\\ref': '\\href{###1}{\\text{#1}}',
+      '\\label': '\\htmlId{#1}{}'
+    }
+  })"
+></script>
+{{- end }}

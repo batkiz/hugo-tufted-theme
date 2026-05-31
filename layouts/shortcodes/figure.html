@@ -1,0 +1,17 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $caption := .Get "caption" | default "" }}
+{{ $class := "" }}
+{{ if .Get "fullwidth" }}
+  {{ $class = "fullwidth" }}
+{{ else if .Get "wide" }}
+  {{ $class = "wide" }}
+{{ else if .Get "gallery" }}
+  {{ $class = "gallery" }}
+{{ end }}
+<figure{{ with $class }} class="{{ . }}"{{ end }}>
+  <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy">
+  {{ with $caption }}
+    <figcaption>{{ . | markdownify }}</figcaption>
+  {{ end }}
+</figure>

@@ -1,0 +1,39 @@
+{{ define "main" }}
+  {{ partial "components/page-header.html" (dict "page" . "isSingle" false "showMeta" false) }}
+
+  {{ with .Content }}
+    <div class="entry-content">
+      {{ . }}
+    </div>
+  {{ end }}
+
+  {{ $pages := .RegularPagesRecursive }}
+  {{ if and (eq .Kind "taxonomy") (gt (len .Pages) 0) }}
+    {{ $pages = .Pages }}
+  {{ end }}
+
+  {{ if gt (len $pages) 0 }}
+    {{ $paginator := .Paginate $pages }}
+    <section class="page-list">
+      {{ $mainSections := site.Params.mainSections | default (slice "blog") }}
+      {{ $shouldGroup := or (.Params.listByYear) (in $mainSections .Section) }}
+
+      {{ if $shouldGroup }}
+        {{ range ($paginator.Pages.ByDate.Reverse).GroupByDate "2006" }}
+          <div class="year-group">
+            <h2>{{ .Key }}</h2>
+            {{ range .Pages }}
+              {{ partial "components/post-tile.html" . }}
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ else }}
+        {{ range $paginator.Pages.ByWeight.ByTitle }}
+          {{ partial "components/post-tile.html" . }}
+        {{ end }}
+      {{ end }}
+    </section>
+
+    {{ partial "components/pagination.html" $paginator }}
+  {{ end }}
+{{ end }}

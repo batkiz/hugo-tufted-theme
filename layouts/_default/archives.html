@@ -1,0 +1,15 @@
+{{ define "main" }}
+  {{ partial "components/page-header.html" (dict "page" . "isSingle" false "showMeta" false) }}
+
+  <section class="page-list archives-list">
+    {{ $pages := where .Site.RegularPages "Type" "in" (site.Params.mainSections | default (slice "blog")) }}
+    {{ range ($pages.GroupByDate "2006") }}
+      <div class="year-group">
+        <h2>{{ .Key }}</h2>
+        {{ range .Pages.ByDate.Reverse }}
+          {{ partial "components/post-tile.html" . }}
+        {{ end }}
+      </div>
+    {{ end }}
+  </section>
+{{ end }}

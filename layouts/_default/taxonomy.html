@@ -1,0 +1,11 @@
+{{ define "main" }}
+  {{ partial "components/page-header.html" (dict "page" . "isSingle" false "showMeta" false) }}
+
+  {{ if gt (len .Pages) 0 }}
+    <section class="page-list">
+      {{ range .Pages.ByDate.Reverse }}
+        {{ partial "components/post-tile.html" . }}
+      {{ end }}
+    </section>
+  {{ end }}
+{{ end }}

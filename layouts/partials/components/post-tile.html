@@ -1,0 +1,21 @@
+<article class="post-tile">
+  {{ $dateFormat := site.Params.dateFormat | default "2006-01-02" }}
+  <time class="post-tile-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format $dateFormat }}</time>
+  <div class="post-tile-body">
+    <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+    <div class="post-tile-meta">
+      <span>{{ i18n "word_count" .WordCount | default (printf "%d words" .WordCount) }}</span>
+      <span>{{ i18n "reading_time" .ReadingTime | default (printf "%d min read" .ReadingTime) }}</span>
+      {{ with first 3 (.GetTerms "tags") }}
+        <span class="post-tile-tags">
+          {{ range $i, $t := . }}
+            {{ if $i }}, {{ end }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          {{ end }}
+        </span>
+      {{ end }}
+    </div>
+    {{ with .Description | default (.Summary | plainify | truncate 150) }}
+      <p>{{ . }}</p>
+    {{ end }}
+  </div>
+</article>

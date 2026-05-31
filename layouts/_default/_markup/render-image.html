@@ -1,0 +1,10 @@
+{{ $classes := slice }}
+{{ if in (slice "fullwidth" "wide" "gallery") .Title }}
+  {{ $classes = $classes | append .Title }}
+{{ end }}
+<figure{{ with $classes }} class="{{ delimit . " " }}"{{ end }}>
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+  {{ if and .Title (not (in (slice "fullwidth" "wide" "gallery") .Title)) }}
+    <figcaption class="marginnote figure-caption">{{ .Title }}</figcaption>
+  {{ end }}
+</figure>

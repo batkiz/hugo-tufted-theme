@@ -1,0 +1,18 @@
+{{ $dateFormat := site.Params.dateFormat | default "2006-01-02" }}
+<div class="page-meta">
+  {{ with .Date }}
+    <span class="meta-date">{{ .Format $dateFormat }}</span>
+  {{ end }}
+  <span class="meta-wordcount">{{ i18n "word_count" .WordCount | default (printf "%d words" .WordCount) }}</span>
+  <span class="meta-readingtime">{{ i18n "reading_time" .ReadingTime | default (printf "%d min read" .ReadingTime) }}</span>
+  {{ if and .Lastmod (ne .Lastmod .Date) }}
+    <span class="meta-updated">Updated {{ .Lastmod.Format $dateFormat }}</span>
+  {{ end }}
+  {{ if and site.Params.options.showMetaTags (ne (len (.GetTerms "tags")) 0) }}
+    <span class="meta-tags">
+      {{ range $i, $t := first 5 (.GetTerms "tags") }}
+        {{ if $i }}, {{ end }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{ end }}
+    </span>
+  {{ end }}
+</div>

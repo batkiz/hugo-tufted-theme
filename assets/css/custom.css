@@ -1,0 +1,434 @@
+/*******************************************************************************
+CUSTOM STYLES
+
+Additional styles for features added during theme migration.
+*******************************************************************************/
+
+/* ---- Header Extras ---- */
+.header-extras {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  color: var(--theme-muted);
+  border-radius: var(--radius-sm);
+  transition: background-color 120ms ease;
+}
+
+.social-links a:hover {
+  background: var(--highlight-weak);
+}
+
+.social-links a svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.lang-switcher {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.lang-switcher a {
+  font-size: 0.9rem;
+  padding: 0.15rem 0.4rem;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.lang-switcher a.active {
+  background: var(--highlight-weak);
+  font-weight: 600;
+}
+
+/* ---- Copy Button ---- */
+.copy-button {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  z-index: 1;
+}
+
+pre:hover .copy-button,
+pre:focus-within .copy-button {
+  opacity: 1;
+}
+
+.copy-button.copied {
+  opacity: 1;
+}
+
+/* ---- Post Pagination (Prev/Next) ---- */
+.post-pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.7rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--theme-rule);
+  width: min(100%, var(--content-width));
+}
+
+.post-pagination a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  max-width: 48%;
+  padding: 0.25rem 0;
+  border-radius: var(--radius-sm);
+  transition: background-color 120ms ease;
+}
+
+.post-pagination a:hover {
+  background: transparent;
+}
+
+.pagination-label {
+  font-size: 0.82rem;
+  margin-bottom: 0.15rem;
+}
+
+.pagination-title {
+  font-size: 0.98rem;
+  font-weight: 400;
+}
+
+.next-post {
+  text-align: right;
+  margin-left: auto;
+}
+
+/* ---- List Pagination ---- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--theme-rule);
+  width: min(100%, var(--content-width));
+}
+
+.pagination a {
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background-color 120ms ease;
+}
+
+.pagination a:hover {
+  background: var(--highlight-weak);
+}
+
+.page-info {
+  font-size: 0.9rem;
+}
+
+/* ---- Series Block ---- */
+.series-block {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--theme-rule);
+  width: min(100%, var(--content-width));
+}
+
+.series-block h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.series-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.series-list li {
+  margin-bottom: 0.4rem;
+}
+
+.external-link {
+  font-size: 0.85rem;
+  margin-left: 0.3rem;
+}
+
+/* ---- Archives ---- */
+/* ---- Home Intro ---- */
+.home-intro {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-bottom: 3rem;
+  width: min(100%, var(--content-width));
+}
+
+.home-intro-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.home-intro .author-desc {
+  margin: 0 0 0.35rem;
+  font-size: 1.42rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.home-intro .author-info,
+.home-note p {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--theme-muted);
+  line-height: 1.7;
+  text-align: left;
+}
+
+.home-intro .avatar {
+  width: 4.6rem;
+  height: 4.6rem;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ---- Featured Posts ---- */
+.featured-section {
+  margin-bottom: 2.5rem;
+  width: min(100%, var(--content-width));
+}
+
+.featured-section h2 {
+  margin-bottom: 1rem;
+}
+
+.featured-post {
+  padding: 0.8rem 0;
+  border-bottom: 1px dashed var(--theme-rule);
+}
+
+/* ---- Comments Area ---- */
+.comments-area {
+  margin-top: 2.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--theme-rule);
+  width: min(100%, var(--content-width));
+}
+
+/* ---- 404 Page ---- */
+.not-found {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.not-found h1 {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.not-found p {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* ---- Top Link Button ---- */
+.top-link {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 99;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--theme-pre-border);
+  border-radius: var(--radius-sm);
+  background: var(--theme-pre-bg);
+  color: var(--theme-text);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.top-link:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* ---- Toggle Shortcode ---- */
+.toggle-shortcode {
+  margin: 1rem 0;
+  width: min(100%, var(--content-width));
+}
+
+.toggle-shortcode summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.3rem 0;
+}
+
+.toggle-content {
+  padding: 0.5rem 0 0.5rem 1rem;
+}
+
+/* ---- Tabs Shortcode ---- */
+.tabs {
+  margin: 1.5rem 0;
+  width: min(100%, var(--content-width));
+}
+
+.tabs-markdown {
+  max-width: var(--content-width);
+}
+
+.tabs-align-left {
+  text-align: left;
+}
+
+.tabs-align-right {
+  text-align: right;
+}
+
+.tabs label {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+
+.tabs input[type="radio"]:checked + label {
+  border-bottom-color: currentColor;
+  font-weight: 700;
+}
+
+.tabs-code label {
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  font-size: 0.85rem;
+}
+
+.tab-content {
+  display: none;
+  padding: 0.8rem 0;
+}
+
+.tabs input[type="radio"]:nth-of-type(1):checked ~ .tab-content:nth-of-type(1),
+.tabs input[type="radio"]:nth-of-type(2):checked ~ .tab-content:nth-of-type(2),
+.tabs input[type="radio"]:nth-of-type(3):checked ~ .tab-content:nth-of-type(3),
+.tabs input[type="radio"]:nth-of-type(4):checked ~ .tab-content:nth-of-type(4),
+.tabs input[type="radio"]:nth-of-type(5):checked ~ .tab-content:nth-of-type(5),
+.tabs input[type="radio"]:nth-of-type(6):checked ~ .tab-content:nth-of-type(6),
+.tabs input[type="radio"]:nth-of-type(7):checked ~ .tab-content:nth-of-type(7),
+.tabs input[type="radio"]:nth-of-type(8):checked ~ .tab-content:nth-of-type(8) {
+  display: block;
+}
+
+/* ---- Video Shortcode ---- */
+.video-shortcode {
+  max-width: 100%;
+  width: min(100%, var(--content-width));
+  border-radius: 0;
+}
+
+/* ---- Footnote Ref ---- */
+.footnote-ref a {
+  text-decoration: none;
+  font-size: 0.78em;
+  vertical-align: super;
+}
+
+/* ---- Margin Note Hover ---- */
+.footnote-ref,
+.footnote-ref-wrapper,
+.footnote-ref + .marginnote,
+.footnote-ref-wrapper + .marginnote,
+.marginnote-toggle,
+.marginnote-toggle + .marginnote {
+  --note-highlight: transparent;
+  background: var(--note-highlight);
+  box-shadow: 0 0 0 0.25rem var(--note-highlight);
+  border-radius: var(--radius-sm);
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.footnote-ref:hover + .marginnote,
+.footnote-ref:focus-within + .marginnote,
+.footnote-ref-wrapper:hover + .marginnote,
+.footnote-ref-wrapper:focus-within + .marginnote,
+.marginnote-toggle:hover + .marginnote,
+.marginnote-toggle:focus-visible + .marginnote,
+.marginnote:hover {
+  --note-highlight: var(--highlight-weak);
+}
+
+.footnote-sidenote {
+  border-top: 1px solid transparent;
+}
+
+.marginnote-number {
+  font-size: 0.72em;
+  vertical-align: super;
+  color: var(--theme-faint);
+}
+
+/* ---- Math / KaTeX dark mode ---- */
+.katex { font-size: 1.1em !important; }
+
+@media (max-width: 760px) {
+  .post-pagination {
+    flex-direction: column;
+  }
+
+  .post-pagination a {
+    max-width: 100%;
+  }
+
+  .next-post {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .archive-entries li {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .header-extras {
+    margin-top: 0.1rem;
+  }
+
+  .home-intro {
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .home-intro .avatar {
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+}

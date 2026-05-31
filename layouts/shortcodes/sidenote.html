@@ -1,0 +1,13 @@
+{{ $id := .Get "id" | default (printf "sidenote-%s-%d" .Page.File.UniqueID .Ordinal) }}
+{{ $label := .Get "label" | default (printf "%d" .Ordinal) }}
+<button
+  type="button"
+  class="marginnote-toggle sidenote-number"
+  aria-controls="{{ $id }}"
+  aria-expanded="false"
+>
+  {{ $label }}
+</button>
+<aside id="{{ $id }}" class="marginnote sidenote">
+  {{ .Inner | markdownify }}
+</aside>

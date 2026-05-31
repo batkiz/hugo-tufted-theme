@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',function(){if(!siteParams||!siteParams.enableImgZooming)return;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js';s.onload=function(){mediumZoom('.entry-content img:not(.no-zoom)',{margin:24,background:'rgba(0,0,0,0.8)',scrollOffset:0})};document.head.appendChild(s)});

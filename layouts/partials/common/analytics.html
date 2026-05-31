@@ -1,0 +1,6 @@
+{{- if .Site.Params.analytics.google.SiteVerificationTag }}
+<meta name="google-site-verification" content="{{ .Site.Params.analytics.google.SiteVerificationTag }}">
+{{- end }}
+{{- if .Site.Params.analytics.umami.enable }}
+<script async defer data-website-id="{{ .Site.Params.analytics.umami.website_id }}" src="{{ .Site.Params.analytics.umami.url }}"></script>
+{{- end }}

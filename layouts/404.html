@@ -1,0 +1,7 @@
+{{ define "main" }}
+  <article class="entry-content not-found">
+    <h1>404</h1>
+    <p>{{ i18n "notFound" | default "Page not found." }}</p>
+    <p><a href="{{ .Site.Home.RelPermalink }}">{{ i18n "backHome" | default "Back to home" }}</a></p>
+  </article>
+{{ end }}

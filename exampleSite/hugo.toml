@@ -1,0 +1,48 @@
+baseURL = "https://example.org/"
+languageCode = "zh-CN"
+title = "Tufted Hugo Theme"
+theme = "hugo-tufted-theme"
+
+[params]
+  description = "A calm, content-first Hugo site inspired by the Tufted Typst template."
+  author = "@Yousa-Mirage"
+  dateFormat = "2006-01-02"
+  mainSections = ["blog"]
+  recentPostsCount = 3
+  recentPostsTitle = "Recent Posts"
+  showReadingTime = true
+  showThemeToggle = true
+  headerElements = ["你好 Ciallo～(∠・ω< )⌒☆", "欢迎使用 Hugo 版本的 Tufted 主题。"]
+  footerElements = ["© 2026 Tufted Hugo Theme", "Powered by [Hugo](https://gohugo.io/)"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  tag = "tags"
+
+[[menu.main]]
+  identifier = "home"
+  name = "Home"
+  url = "/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "docs"
+  name = "Docs"
+  url = "/docs/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "blog"
+  name = "Blog"
+  url = "/blog/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about/"
+  weight = 40

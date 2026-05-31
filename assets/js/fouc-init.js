@@ -1,0 +1,1 @@
+(function(){var t;try{t=sessionStorage.getItem('theme-preference')}catch(e){}if(!t)return;document.documentElement.setAttribute('data-theme',t)})()
