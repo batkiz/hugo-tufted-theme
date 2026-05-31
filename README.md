@@ -1,6 +1,6 @@
 # Hugo Tufted Theme
 
-这是一个从当前 Typst 版 `Tufted-Blog-Template` 提炼出来的 Hugo 主题，目标是保留原模板的这些特点：
+原始版本是 [Typst 版 `Tufted-Blog-Template`](https://github.com/Yousa-Mirage/Tufted-Blog-Template) ，使用 codex 迁移为 hugo 主题。
 
 - Tufte 风格的宽边栏阅读布局
 - 纸张质感的极简排版
@@ -8,16 +8,6 @@
 - 博客列表按年份归档
 - 适合博客、文档、个人主页的统一壳层
 
-## 目录说明
-
-```text
-hugo-tufted-theme/
-├── archetypes/         # 新建内容时的 front matter 模板
-├── assets/             # CSS 和 JS
-├── exampleSite/        # 可直接运行的示例站点
-├── layouts/            # Hugo 模板与 shortcodes
-└── theme.toml
-```
 
 ## 本地预览
 
