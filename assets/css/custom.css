@@ -269,13 +269,26 @@ pre:focus-within .copy-button {
   background: var(--theme-pre-bg);
   color: var(--theme-text);
   cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 150ms ease, transform 150ms ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.35rem);
+  transition: opacity 150ms ease, transform 150ms ease, visibility 150ms ease;
+}
+
+.top-link.is-visible {
+  opacity: 0.72;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .top-link:hover {
   opacity: 1;
   transform: translateY(-2px);
+}
+
+.top-link svg {
+  width: 1.35rem;
+  height: 1.35rem;
 }
 
 /* ---- Toggle Shortcode ---- */

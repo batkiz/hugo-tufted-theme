@@ -11,6 +11,8 @@ html {
     font-size: 11pt;
     min-height: 100%;
     scroll-behavior: smooth;
+    hanging-punctuation: allow-end;
+    text-spacing-trim: trim-start;
 }
 
 body {
@@ -19,10 +21,12 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino,
-        "Noto Serif SC", "Source Han Serif SC", serif;
+        "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC",
+        "SimSun", serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     font-kerning: normal;
+    font-synthesis-weight: none;
 }
 
 ::selection {
@@ -261,6 +265,7 @@ li,
 dd {
     font-size: 1.14rem;
     line-height: 1.92rem;
+    overflow-wrap: break-word;
 }
 
 p {
@@ -326,6 +331,11 @@ figure svg,
     border-radius: 0.12rem;
 }
 
+img[loading="lazy"] {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 420px;
+}
+
 .entry-content > img,
 .entry-content > svg {
     width: min(100%, var(--content-width));
@@ -376,12 +386,178 @@ figcaption.figure-caption {
     margin: 0.8rem 0.75rem 0.8rem 0;
 }
 
+.entry-content > p.auto-gallery-item {
+    width: min(100%, var(--content-width));
+    max-width: var(--content-width);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+    align-items: start;
+    margin: 1.2rem 0 1.55rem;
+}
+
+.entry-content > .auto-gallery-group {
+    width: min(100%, var(--content-width));
+    max-width: var(--content-width);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+    align-items: start;
+    margin: 1.2rem 0 1.55rem;
+}
+
+.entry-content > p.auto-gallery-item > figure.auto-gallery,
+.entry-content > .auto-gallery-group > figure.auto-gallery,
+.entry-content > .auto-gallery-group > p.auto-gallery-item {
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+.entry-content > .auto-gallery-group > p.auto-gallery-item > figure.auto-gallery {
+    margin: 0;
+}
+
+.auto-gallery .figure-caption,
+.gallery .figure-caption,
+.inline-caption {
+    float: none;
+    clear: none;
+    width: auto;
+    margin: 0.55rem 0 0;
+    padding: 0;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    text-align: left;
+}
+
+.auto-gallery .figure-caption::before,
+.gallery .figure-caption::before,
+.inline-caption::before {
+    content: "";
+}
+
 .gallery img,
 .gallery svg,
 .auto-gallery img,
 .auto-gallery svg {
     aspect-ratio: 4 / 3;
     object-fit: cover;
+}
+
+.entry-content img.is-zoomable {
+    cursor: zoom-in;
+}
+
+.entry-content img.is-zoomable:focus-visible {
+    outline: 2px solid var(--theme-rule-strong);
+    outline-offset: 4px;
+}
+
+html.has-image-lightbox,
+html.has-image-lightbox body {
+    overflow: hidden;
+}
+
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: minmax(2.75rem, 1fr) minmax(0, auto) minmax(2.75rem, 1fr);
+    align-items: center;
+    justify-items: center;
+    gap: 1rem;
+    padding: 2.75rem 1.25rem 1.25rem;
+    box-sizing: border-box;
+    background: rgba(14, 13, 11, 0.86);
+    color: #fffaf0;
+}
+
+.image-lightbox[hidden] {
+    display: none;
+}
+
+.image-lightbox-figure {
+    grid-column: 2;
+    display: grid;
+    justify-items: center;
+    gap: 0.65rem;
+    max-width: min(92vw, 84rem);
+    max-height: calc(100vh - 4.6rem);
+    margin: 0;
+}
+
+.image-lightbox-image {
+    display: block;
+    max-width: min(92vw, 84rem);
+    max-height: calc(100vh - 7rem);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.34);
+}
+
+.image-lightbox-caption {
+    max-width: min(92vw, 46rem);
+    color: rgba(255, 250, 240, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    text-align: center;
+}
+
+.image-lightbox-close,
+.image-lightbox-nav {
+    border: 1px solid rgba(255, 250, 240, 0.24);
+    border-radius: 999px;
+    background: rgba(255, 250, 240, 0.10);
+    color: #fffaf0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.image-lightbox-close:hover,
+.image-lightbox-nav:hover,
+.image-lightbox-close:focus-visible,
+.image-lightbox-nav:focus-visible {
+    background: rgba(255, 250, 240, 0.18);
+    border-color: rgba(255, 250, 240, 0.42);
+}
+
+.image-lightbox-close:focus-visible,
+.image-lightbox-nav:focus-visible {
+    outline: 2px solid rgba(255, 250, 240, 0.72);
+    outline-offset: 3px;
+}
+
+.image-lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.45rem;
+    height: 2.45rem;
+}
+
+.image-lightbox-close svg,
+.image-lightbox-nav svg {
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+.image-lightbox-nav {
+    width: 2.85rem;
+    height: 2.85rem;
+}
+
+.image-lightbox-prev {
+    grid-column: 1;
+}
+
+.image-lightbox-next {
+    grid-column: 3;
 }
 
 pre {
@@ -799,6 +975,69 @@ sup.footnote-ref-wrapper {
         display: block;
         width: 100%;
         margin-right: 0;
+    }
+
+    .entry-content > p.auto-gallery-item {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 1rem 0 1.35rem;
+    }
+
+    .entry-content > .auto-gallery-group {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 1rem 0 1.35rem;
+    }
+
+    .entry-content > p.auto-gallery-item > figure.auto-gallery,
+    .entry-content > .auto-gallery-group > figure.auto-gallery,
+    .entry-content > .auto-gallery-group > p.auto-gallery-item {
+        margin: 0 0 1rem;
+    }
+
+    .entry-content > .auto-gallery-group > p.auto-gallery-item > figure.auto-gallery {
+        margin: 0;
+    }
+
+    .image-lightbox {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr auto;
+        gap: 0.85rem;
+        padding: 3.5rem 1rem 1rem;
+    }
+
+    .image-lightbox-figure {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        max-width: 100%;
+        max-height: calc(100vh - 7.5rem);
+    }
+
+    .image-lightbox-image {
+        max-width: 100%;
+        max-height: calc(100vh - 10rem);
+    }
+
+    .image-lightbox-caption {
+        font-size: 0.88rem;
+    }
+
+    .image-lightbox-nav {
+        grid-row: 2;
+        width: 2.7rem;
+        height: 2.7rem;
+    }
+
+    .image-lightbox-prev {
+        grid-column: 1;
+        justify-self: end;
+    }
+
+    .image-lightbox-next {
+        grid-column: 2;
+        justify-self: start;
     }
 
     .post-tile {

@@ -3,7 +3,7 @@
   {{ $classes = $classes | append .Title }}
 {{ end }}
 <figure{{ with $classes }} class="{{ delimit . " " }}"{{ end }}>
-  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async">
   {{ if and .Title (not (in (slice "fullwidth" "wide" "gallery") .Title)) }}
     <figcaption class="marginnote figure-caption">{{ .Title }}</figcaption>
   {{ end }}
