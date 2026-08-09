@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Locale | default "zh-CN" }}">
   {{ partial "head.html" . }}
+  {{ $showDarkMode := true }}
+  {{ $hasDarkModeOption := false }}
+  {{ with .Site.Params.options }}
+    {{ if isset . "showdarkmode" }}
+      {{ $showDarkMode = .showDarkMode }}
+      {{ $hasDarkModeOption = true }}
+    {{ end }}
+  {{ end }}
+  {{ if and (not $hasDarkModeOption) (isset .Site.Params "showthemetoggle") }}
+    {{ $showDarkMode = .Site.Params.showThemeToggle }}
+  {{ end }}
   <body
     class="site-page kind-{{ .Kind }}"
-    data-theme-toggle="{{ if .Site.Params.options.showDarkMode | default site.Params.showThemeToggle | default true }}true{{ else }}false{{ end }}"
+    data-theme-toggle="{{ if $showDarkMode }}true{{ else }}false{{ end }}"
   >
     {{ partial "header.html" . }}
     <main class="site-main">

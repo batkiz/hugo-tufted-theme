@@ -1,6 +1,13 @@
 {{- if .Site.Params.analytics.google.SiteVerificationTag }}
 <meta name="google-site-verification" content="{{ .Site.Params.analytics.google.SiteVerificationTag }}">
 {{- end }}
-{{- if .Site.Params.analytics.umami.enable }}
-<script async defer data-website-id="{{ .Site.Params.analytics.umami.website_id }}" src="{{ .Site.Params.analytics.umami.url }}"></script>
+{{- with .Site.Params.analytics.cloudflare }}
+  {{- if and .enable .token }}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"{{ .token }}"}'></script>
+  {{- end }}
+{{- end }}
+{{- with .Site.Params.analytics.umami }}
+  {{- if and .enable .website_id .url }}
+<script async defer data-website-id="{{ .website_id }}" src="{{ .url }}"></script>
+  {{- end }}
 {{- end }}

@@ -1,10 +1,59 @@
-{{ $classes := slice }}
-{{ if in (slice "fullwidth" "wide" "gallery") .Title }}
-  {{ $classes = $classes | append .Title }}
-{{ end }}
+{{- $classes := slice -}}
+{{- $layoutTitles := slice "fullwidth" "wide" "gallery" -}}
+{{- if in $layoutTitles .Title -}}
+  {{- $classes = $classes | append .Title -}}
+{{- end -}}
+
+{{- $sizes := "(max-width: 1100px) calc(100vw - 2rem), 46rem" -}}
+{{- if eq .Title "fullwidth" -}}
+  {{- $sizes = "(max-width: 1100px) calc(100vw - 2rem), calc(100vw - 3rem)" -}}
+{{- else if eq .Title "wide" -}}
+  {{- $sizes = "(max-width: 1100px) calc(100vw - 2rem), 66.7rem" -}}
+{{- else if eq .Title "gallery" -}}
+  {{- $sizes = "(max-width: 760px) calc(100vw - 2rem), 22.6rem" -}}
+{{- end -}}
+
+{{- $quality := 82 -}}
+{{- $maxWidth := 2400 -}}
+{{- $responsiveWidths := slice 480 768 1200 1600 -}}
+{{- with .Page.Site.Params.images -}}
+  {{- with .quality }}{{ $quality = int . }}{{ end -}}
+  {{- with .maxWidth }}{{ $maxWidth = int . }}{{ end -}}
+  {{- with .responsiveWidths }}{{ $responsiveWidths = . }}{{ end -}}
+{{- end -}}
+
+{{- $image := .Page.Resources.GetMatch .Destination -}}
+{{- $processableTypes := slice "jpeg" "png" "tiff" "bmp" "webp" -}}
+{{- $processable := and $image (eq $image.ResourceType "image") (in $processableTypes $image.MediaType.SubType) -}}
+
 <figure{{ with $classes }} class="{{ delimit . " " }}"{{ end }}>
-  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async">
-  {{ if and .Title (not (in (slice "fullwidth" "wide" "gallery") .Title)) }}
+  {{- if $processable -}}
+    {{- $targetWidth := $maxWidth -}}
+    {{- if lt $image.Width $targetWidth -}}
+      {{- $targetWidth = $image.Width -}}
+    {{- end -}}
+    {{- $default := $image.Resize (printf "%dx webp q%d" $targetWidth $quality) -}}
+    {{- $srcset := slice -}}
+    {{- range $responsiveWidths -}}
+      {{- $candidateWidth := int . -}}
+      {{- if lt $candidateWidth $targetWidth -}}
+        {{- $candidate := $image.Resize (printf "%dx webp q%d" $candidateWidth $quality) -}}
+        {{- $srcset = $srcset | append (printf "%s %dw" $candidate.RelPermalink $candidate.Width) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $srcset = $srcset | append (printf "%s %dw" $default.RelPermalink $default.Width) -}}
+    <img src="{{ $default.RelPermalink }}"
+      srcset="{{ delimit $srcset ", " }}"
+      sizes="{{ $sizes }}"
+      width="{{ $default.Width }}"
+      height="{{ $default.Height }}"
+      alt="{{ .Text }}"
+      loading="lazy"
+      decoding="async">
+  {{- else -}}
+    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async">
+  {{- end -}}
+  {{- if and .Title (not (in $layoutTitles .Title)) }}
     <figcaption class="marginnote figure-caption">{{ .Title }}</figcaption>
-  {{ end }}
+  {{- end }}
 </figure>

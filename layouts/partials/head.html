@@ -14,10 +14,12 @@
   {{ $description := .Description | default .Params.description | default .Site.Params.description | default .Site.Title }}
   <meta name="description" content="{{ $description }}">
 
-  {{ with .Site.Params.author.name }}
-    <meta name="author" content="{{ . }}">
-  {{ else }}
-    {{ with .Site.Params.author }}
+  {{ with .Site.Params.author }}
+    {{ if reflect.IsMap . }}
+      {{ with .name }}
+        <meta name="author" content="{{ . }}">
+      {{ end }}
+    {{ else }}
       <meta name="author" content="{{ . }}">
     {{ end }}
   {{ end }}
@@ -59,8 +61,23 @@
     (resources.Get "js/format-headings.js")
     (resources.Get "js/image-layout.js")
     (resources.Get "js/marginnote-toggle.js")
-    (resources.Get "js/medium-zoom-init.js")
     (resources.Get "js/top-link.js")
+  }}
+  {{ $enableImgZooming := true }}
+  {{ $hasImgZoomingOption := false }}
+  {{ with .Site.Params.options }}
+    {{ if isset . "enableimgzooming" }}
+      {{ $enableImgZooming = .enableImgZooming }}
+      {{ $hasImgZoomingOption = true }}
+    {{ end }}
+  {{ end }}
+  {{ if and (not $hasImgZoomingOption) (isset .Site.Params "enableimgzooming") }}
+    {{ $enableImgZooming = .Site.Params.enableImgZooming }}
+  {{ end }}
+  {{ if $enableImgZooming }}
+    {{ $js = $js | append (resources.Get "js/medium-zoom-init.js") }}
+  {{ end }}
+  {{ $js = $js
     | resources.Concat "js/site.js"
     | minify
     | fingerprint

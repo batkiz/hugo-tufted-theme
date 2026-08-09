@@ -42,7 +42,43 @@ theme = "hugo-tufted-theme"
   showThemeToggle = true
   headerElements = ["你好，欢迎来到这里。"]
   footerElements = ["© 2026 Your Name", "Powered by Hugo"]
+
+  [params.options]
+    showDarkMode = true
+    enableImgZooming = true
+
+  [params.images]
+    quality = 82
+    maxWidth = 2400
+    responsiveWidths = [480, 768, 1200, 1600]
+
+  [params.analytics.cloudflare]
+    enable = true
+    token = "your-cloudflare-web-analytics-token"
+
+  [params.analytics.umami]
+    enable = false
+    website_id = "your-website-id"
+    url = "https://analytics.example.com/script.js"
+
+  [params.comments.giscus]
+    enable = true
+    repo = "owner/repository"
+    repo_id = "repository-id"
+    category = "Comments"
+    category_id = "category-id"
+    mapping = "pathname"
+    position = "bottom"
+    lang = "zh-CN"
 ```
+
+单篇文章可通过 front matter 中的 `math = true` 或 `katex = true` 启用 KaTeX。
+评论区还兼容 `[params.comments.utterances]` 配置。
+
+Markdown 图片使用 Page Bundle 中的本地图片时，主题会自动生成 WebP 和响应式 `srcset`；
+`params.images` 可以调整输出质量、最大宽度和候选宽度。GIF、SVG、外链图片以及不在
+Page Bundle 中的图片会保留原始地址。图片标题 `fullwidth`、`wide`、`gallery` 用于选择
+布局，其他标题会显示为图注。
 
 ## 内容建议
 

@@ -1,27 +1,29 @@
-{{- if and .Site.Params.comments.giscus.enable .Site.Params.comments.giscus.repo }}
+{{- $giscus := .Site.Params.comments.giscus -}}
+{{- if and $giscus.enable $giscus.repo $giscus.repo_id $giscus.category $giscus.category_id }}
 <div class="comments-area">
   <script src="https://giscus.app/client.js"
-    data-repo="{{ .Site.Params.comments.giscus.repo }}"
-    data-repo-id="{{ .Site.Params.comments.giscus.repo_id }}"
-    data-category="{{ .Site.Params.comments.giscus.category }}"
-    data-category-id="{{ .Site.Params.comments.giscus.category_id }}"
-    data-mapping="{{ .Site.Params.comments.giscus.mapping | default "pathname" }}"
+    data-repo="{{ $giscus.repo }}"
+    data-repo-id="{{ $giscus.repo_id }}"
+    data-category="{{ $giscus.category }}"
+    data-category-id="{{ $giscus.category_id }}"
+    data-mapping="{{ $giscus.mapping | default "pathname" }}"
     data-strict="0"
     data-reactions-enabled="1"
     data-emit-metadata="0"
-    data-input-position="{{ .Site.Params.comments.giscus.position | default "bottom" }}"
+    data-input-position="{{ $giscus.position | default "bottom" }}"
     data-theme="preferred_color_scheme"
-    data-lang="{{ .Site.Params.comments.giscus.lang | default .Site.Language.Locale | default "zh-CN" }}"
+    data-lang="{{ $giscus.lang | default .Site.Language.Locale | default "zh-CN" }}"
     crossorigin="anonymous"
     async>
   </script>
 </div>
 {{- end }}
-{{- if .Site.Params.comments.utteranc.enable }}
+{{- $utterances := .Site.Params.comments.utterances | default .Site.Params.comments.utteranc -}}
+{{- if and $utterances.enable $utterances.repo }}
 <div class="comments-area">
   <script src="https://utteranc.es/client.js"
-    repo="{{ .Site.Params.comments.utteranc.repo }}"
-    issue-term="{{ .Site.Params.comments.utteranc.issueTerm | default "pathname" }}"
+    repo="{{ $utterances.repo }}"
+    issue-term="{{ $utterances.issueTerm | default "pathname" }}"
     theme="preferred-color-scheme"
     crossorigin="anonymous"
     async>
